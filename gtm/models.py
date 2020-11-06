@@ -14,6 +14,6 @@ class GTMConfiguration(models.Model):
     def get_current_config(request):
         current_site = get_current_site(request)
         try:
-            return GTMConfiguration.objects.get(id=current_site.id)
+            return GTMConfiguration.objects.get(site=current_site.id)
         except GTMConfiguration.DoesNotExist:
             return None
