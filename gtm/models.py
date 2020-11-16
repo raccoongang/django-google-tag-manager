@@ -5,7 +5,7 @@ from django.contrib.sites.shortcuts import get_current_site
 
 class GTMConfiguration(models.Model):
     site = models.OneToOneField(Site)
-    gtm_id = models.CharField(max_length=10)
+    gtm_id = models.CharField(max_length=20)
 
     class Meta:
         verbose_name_plural = 'GTM Configurations'
