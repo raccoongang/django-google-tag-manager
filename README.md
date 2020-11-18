@@ -6,27 +6,20 @@ templates (http://www.google.com/tagmanager/)
 
 ## Installation and Usage
 
-1. run `pip install django-google-tag-manager`
-2. add `'gtm'` to your `INSTALLED_APPS` setting.
-3. set `GOOGLE_TAG_ID` to your Google Tag Container Id. It
-   should look something like `GTM_XXXXXX`
-4. In your templates (probably in your base template) you `{% load
-   gtm_tags %}` and then add `{% gtm_head %}` to your `<head>` and
-   add `{% gtm_body %}` just below your `<body>` opening tag.
-5. Profit
+1. run `pip install -e git+https://github.com/raccoongang/django-google-tag-manager.git@<version_you_need>#egg=django-google-tag-manager`
+2. add `gtm.apps.GoogleTagManagerConfig` to your `INSTALLED_APPS` setting.
+3. apply migrations by running the Django `migrate` manage.py command.
+4. add `{% load gtm_tags %}` then add `{% gtm_head %}` between `<head>` and `</head>` then add `{% gtm_body %}` between `<body>` and `</body>`
+5. You can add GTM ID by doing one of the next three options:
+    1. pass GTM ID when loading templatetags like `{% gtm_head "GTM-ABC123" %}` and `{% gtm_body "GTM-ABC123" %}`.
+    2. set the GTM ID in Django admin, it's called the "Google Tag Manager" section. You can set the GTM ID for each site separately.
+    3. set `GOOGLE_TAG_ID` into your settings.
+
+All of them have a priority in the same order they are described.
 
 That's it for the most part. If for any reason you want to override
 the templates used to render the tags, they are called
 `gtm/gtm_head.html` and `gtm/gtm_body.html`.
-
-Optionally, you can pass the google tag id as a parameter to the
-templatetag like this:
-
-    {% gtm_head "GTM-ABC123" %}
-
-and
-
-    {% gtm_body "GTM-ABC123" %}
 
 For backwards compatibility you can still use the single `{% gtm %}`
 tag just below your `<body>` opening tag. This will output both the
